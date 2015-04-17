@@ -11,5 +11,5 @@
   <param name="Response_Code" value="//cac:Response/cbc:ResponseCode"/>
   <param name="Issue_Type_Code" value="//cac:Status/cbc:StatusReasonCode"/>
   <param name="Endpoint" value="//cbc:EndpointID"/>
-  <param name="Party_Identifier" value="//cac:DocumentReference/cbc:DocumentTypeCode"/>
+  <param name="Party_Identifier" value="//cac:PartyIdentification/cbc:ID"/>
 </pattern>
