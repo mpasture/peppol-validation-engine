@@ -22,14 +22,13 @@ import com.helger.peppol.validation.domain.ExtendedTransactionKey;
 import com.helger.peppol.validation.domain.TransactionKey;
 import com.helger.peppol.validation.test.TestFile;
 
-public class TradeShiftPeppolTest {
+public class FromPeppolTest {
 
-	private static String TEST_PATH = "C:\\Users\\Christophe\\Documents\\ubl - peppol\\tests";
+	private static String TEST_PATH = "C:\\Users\\Christophe\\Documents\\ubl - peppol\\fromPeppolTests";
 	
 	private List <TestFile> invoiceTestFiles = new ArrayList <TestFile> ();
 	private List <TestFile> orderTestFiles = new ArrayList <TestFile> ();
-	private List <TestFile> despatchAdviceTestFiles = new ArrayList <TestFile> ();
-	private List <TestFile> mlrTestFiles = new ArrayList <TestFile> ();
+	private List <TestFile> despatchAdviceTestFiles = new ArrayList <TestFile> ();	
 	
 	
 	@Before
@@ -66,15 +65,6 @@ public class TradeShiftPeppolTest {
 						}
 					}
 					
-					if ("MLR".equals(subDir.getName())) {
-						transactionKey = new ExtendedTransactionKey(TransactionKey.MLR_36_T71);
-						for (File file : subDir.listFiles()) {
-							
-							mlrTestFiles.add(new TestFile (new FileSystemResource(file.getAbsolutePath()),transactionKey,(Set <String>) null));
-						}
-					}
-					
-					
 				}
 			}
 		}
@@ -83,25 +73,20 @@ public class TradeShiftPeppolTest {
 	
 	
 	@Test
-	public void tradeShiftToPeppolInvoiceMappingReport()  throws Exception {
+	public void fromPeppolInvoiceMappingReport()  throws Exception {
 		validate(invoiceTestFiles);
 		 
 	}
 	
 	@Test
-	public void tradeShiftToPeppolOrdersMappingReport()  throws Exception {
+	public void fromPeppolOrdersMappingReport()  throws Exception {
 		validate(orderTestFiles);
 		 
 	}
 	
-	@Test
-	public void tradeShiftToPeppolMLRMappingReport()  throws Exception {
-		validate(mlrTestFiles);
-		 
-	}
 	
 	@Test
-	public void tradeShiftToPeppolDespatchAdviceMappingReport()  throws Exception {
+	public void fromPeppolDespatchAdviceMappingReport()  throws Exception {
 		validate(despatchAdviceTestFiles);
 		 
 	}
@@ -124,17 +109,8 @@ public class TradeShiftPeppolTest {
 		      Iterator<IResourceError> it = aXSDErrors.iterator();
 		      while (it.hasNext())  {
 		    	  System.out.println(it.next().getAsString(Locale.ENGLISH));
-		      } 
-		      
-		      if (aXSDErrors.isEmpty()) {
-		    	// Read as desired type
-			      final IResourceErrorGroup aSCHErrors = aValidator.applySchematronValidation (aTestFile.getResource ());
-			      it = aSCHErrors.iterator();
-			      while (it.hasNext())  {
-			    	  IResourceError error = it.next();		    	  
-			    	  System.out.println(error.getAsString(Locale.ENGLISH));
-			      }  
 		      }
+		      
 		      
 		    }
 	}
